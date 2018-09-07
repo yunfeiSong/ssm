@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+ <!-- <bean class="com.fly.spring.User"
+        p:age="21"
+        p:name="张三"
+        p:note="setter注入，需要无参构造器"
+        p:lists-ref="list">
+    &lt;!&ndash;<property name="lists">
+      <list>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+      </list>
+    </property>&ndash;&gt;
+    <property name="sets">
+      <set>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+      </set>
+    </property>
+    <property name="maps">
+      <map>
+        <entry key="1" value="1"/>
+        <entry key="2" value="2"/>
+        <entry key="3" value="3"/>
+      </map>
+    </property>
+    <property name="pros">
+      <props>
+        <prop key="1">1</prop>
+        <prop key="2">2</prop>
+        <prop key="3">3</prop>
+      </props>
+    </property>
+    <property name="arrays">
+      <array>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+      </array>
+    </property>
+    &lt;!&ndash;<property name="role">
+      <list>
+        <ref bean="role1"/>
+        <ref bean="role2"/>
+      </list>
+    </property>
+    <property name="maps2">
+      <map>
+        <entry key-ref="role1" value-ref="user1"/>
+        <entry key-ref="role2" value-ref="user1"/>
+      </map>
+    </property>&ndash;&gt;
+  </bean>
+
+  <bean id="user1" class="com.fly.spring.User" p:name="李四" p:note="lili" p:age="55"/>
+&lt;!&ndash;############## util 应用 ####################&ndash;&gt;
+  <util:list id="list">
+    <value>1</value>
+    <value>2</value>
+    <value>3</value>
+  </util:list>-->
+<!--#############################################-->
+ <!-- <bean id="role1" class="com.fly.spring.Role"
+        p:name="经理"
+        p:lev="1"/>
+  <bean id="role2" class="com.fly.spring.Role"
+        p:name="文员"
+        p:lev="2"/>-->
+
+  <!-- <bean id="user1" class="com.fly.spring.User" p:age="21" p:name="张三" p:note="setter注入，需要无参构造器"/>-->
+
+  <!--<bean id="user1" class="com.fly.spring.User" p:note="setter注入，p标签可混用">
+    <property name="age"><value>22</value></property>
+    <property name="name" value="张三"/>
+  </bean>-->
+
+  <!--
+    <bean id="user1" class="com.fly.spring.User">
+      <constructor-arg value="张思" index="2" type="java.lang.String"/>
+      <constructor-arg value="111" index="1" type="int"/>
+      <constructor-arg value="构造器注入，index可指定顺序，type可指定类型" index="0" type="java.lang.String"/>
+    </bean>
+  -->
+
+ <!-- <context:component-scan base-package="com.fly"/>
+  <context:property-placeholder location="classpath:dataSource.properties" ignore-resource-not-found="true" file-encoding="UTF-8"/>
+-->
+  <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+    <property name="username" value="${username}" />
+    <property name="password" value="${password}" />
+    <property name="url" value="${url}" />
+    <property name="driverClassName" value="${driver}" />
+  </bean>-->
+
+  <!--<mvc:annotation-driven/>
+  <mvc:default-servlet-handler/>
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+        p:prefix="/WEB_INF/pages/"
+        p:suffix=".jsp"/>-->
+</beans>
