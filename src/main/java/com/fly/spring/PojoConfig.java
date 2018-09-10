@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author : SongYF
- * @desc :
+ * @desc : 扫描器，默认扫描文件本包
  * @date : 2018/9/5
  * @Copyright (c) 2015 jigoon
  */

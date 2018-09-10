@@ -11,13 +11,12 @@ import java.util.Properties;
 
 /**
  * @author : SongYF
- * @desc :
+ * @desc : 数据源
  * @date : 2018/9/7
  * @Copyright (c) 2015 jigoon
  */
 
 @Component
-@Conditional({DataSourceCondition.class})
 public class DataSourceBean {
   @Value("${driver}")
   private String driverClassName;
@@ -28,7 +27,8 @@ public class DataSourceBean {
   @Value("${password}")
   private String password;
 
-  @Bean
+  @Bean(name = "dataSource")
+  @Conditional({DataSourceCondition.class})// 是否加载 Bean 的条件
   public DruidDataSource getDruidDataSource(){
     Properties properties = new Properties();
     properties.setProperty("driverClassName", driverClassName);

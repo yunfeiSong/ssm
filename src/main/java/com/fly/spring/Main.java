@@ -7,6 +7,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,7 +33,7 @@ public class Main {
   private DruidDataSource dataSource;
 
   public static void main(String args[]) {
-    ApplicationContext ctx = //new ClassPathXmlApplicationContext("applicationContext.xml");
+    ApplicationContext ctx = null;//new ClassPathXmlApplicationContext("applicationContext.xml");
     //DruidDataSource dataSource = (DruidDataSource) ctx.getBean("dataSource");
     //System.out.println(dataSource.getUrl());
     //User user = (User) ctx.getBean("com.fly.spring.User#0");//bean 无 id 时使用：全先顶名#数字
@@ -47,9 +50,11 @@ public class Main {
 //    System.out.println(user);
 
     ctx = new AnnotationConfigApplicationContext(PojoConfig.class);
-//    RoleService service = (RoleService) ctx.getBean("roleService");
-//    Role role = ctx.getBean(Role.class);
-//    service.printRoleInfo(role);
+    RoleService service = (RoleService) ctx.getBean("roleService1");
+    Role role = ctx.getBean(Role.class);
+    service.printRoleInfo(role);
+    ELBean eLBean = (ELBean) ctx.getBean("eLBean");
+    System.out.println(eLBean);
 //    service.printRoleInfo();
 //    service.printRoleInfoAuto();
     //ctx.getBean(Main.class).roleService1.printRoleInfoAuto();
@@ -57,6 +62,31 @@ public class Main {
     //System.out.println(ctx.getBean(Main.class).dataSource.getUrl());
     ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class);
     //System.out.println(ctx.getEnvironment().getProperty("url"));
+
+    /**
+     * spring EL 表达式
+     */
+    //表达式解析器
+    /* ExpressionParser parser = new SpelExpressionParser();
+    //表达式
+    Expression exp = parser.parseExpression("'Hello World !'");
+   String str = (String) exp.getValue();
+    System.out.println(str);
+    //通过 EL 访问普通方法
+    exp = parser.parseExpression("'Hello World !'.charAt(0)");
+    System.out.println(exp.getValue());
+    //通过 EL 访问 getter 方法
+    exp = parser.parseExpression("'Hello World !'.bytes");
+    System.out.println(exp.getValue());
+    //通过 EL 访问属性
+    exp = parser.parseExpression("'Hello World !'.getBytes().length");
+    System.out.println(exp.getValue());
+    exp = parser.parseExpression("new String('123')");
+    System.out.println(exp.getValue());
+
+    Role role1 = new Role("员工", "jiu");
+    exp = parser.parseExpression("'员工'");
+    System.out.println((String) exp.getValue(role1));*/
 
   }
 

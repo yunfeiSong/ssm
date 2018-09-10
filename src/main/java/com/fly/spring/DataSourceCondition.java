@@ -7,7 +7,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
  * @author : SongYF
- * @desc :
+ * @desc : 加载 Bean 的条件，返回true则加载，false则不加载
  * @date : 2018/9/7
  * @Copyright (c) 2015 jigoon
  */
@@ -16,7 +16,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 public class DataSourceCondition implements Condition {
   public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
     Environment env = conditionContext.getEnvironment();
-    Boolean result =  env.containsProperty("driverClassName")&&env.containsProperty("url")&&env.containsProperty("username")&&env.containsProperty("password");
+    Boolean result =  env.containsProperty("driver")&&env.containsProperty("url")&&env.containsProperty("username")&&env.containsProperty("password");
     return result;
   }
 }

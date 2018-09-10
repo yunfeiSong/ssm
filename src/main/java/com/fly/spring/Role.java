@@ -6,17 +6,28 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author : SongYF
- * @desc :
+ * @desc : 角色表
  * @date : 2018/9/5
  * @Copyright (c) 2015 jigoon
  */
 
 @Component
 public class Role {
-  @Value("董事长")
+  //@Value("董事长")
+//  @Value("#{'董事长'}")// EL 表达式的方式，赋值
+  @Value("#{null}")
   private String name;
-  @Value("1")
+  //@Value("1")
+  @Value("#{1}")
   private String lev;
+
+  public Role() {
+  }
+
+   public Role(String name, String lev) {
+    this.name = name;
+    this.lev = lev;
+  }
 
   public String getName() {
     return name;
