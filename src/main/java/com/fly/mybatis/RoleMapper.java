@@ -7,4 +7,6 @@ package com.fly.mybatis;
  * @Copyright (c) 2015 jigoon
  */
 public interface RoleMapper {
+
+  Role getRole(int id);
 }

@@ -4,10 +4,13 @@ import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,15 +25,35 @@ import java.io.InputStream;
 
 public class Main {
 
+  private static Logger log = LoggerFactory.getLogger(Main.class);
+
   public static void main(String[] args) {
 
-    System.out.println(getSqlSessionFactory());
-    System.out.println(getSqlSessionFactory1());
+    //System.out.println(getSqlSessionFactory());
+    //System.out.println(getSqlSessionFactory1());
+
+    SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+    SqlSession sqlSession = null;
+    try {
+      sqlSession = sqlSessionFactory.openSession();
+
+      RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
+      Role role = roleMapper.getRole(1);
+
+      log.info(role.getRoleName());
+
+      sqlSession.commit();
+    } catch (Exception e) {
+      e.printStackTrace();
+      sqlSession.rollback();
+    } finally {
+      sqlSession.close();
+    }
 
   }
 
 
-  public static SqlSessionFactory getSqlSessionFactory1(){
+  public static SqlSessionFactory getSqlSessionFactory1() {
 
     PooledDataSource dataSource = new PooledDataSource();
     dataSource.setDriver("com.mysql.jdbc.Driver");
@@ -58,6 +81,7 @@ public class Main {
 
   /**
    * 构建 SqlSessionFactory 通过 xml 文件的方式
+   *
    * @return SqlSessionFactory 实例
    */
   public static SqlSessionFactory getSqlSessionFactory() {

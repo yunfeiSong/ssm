@@ -3,27 +3,48 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+  <!-- 添加属性 方式一：主动配置 优先级最低 -->
+  <!--<properties>
+    <property name="driver" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql:///test_song"/>
+    <property name="username" value="root"/>
+    <property name="password" value="123456"/>
+  </properties>-->
+  <!-- 添加属性 方式二：外部引入 推荐 -->
+  <!-- 添加属性 方式三：硬编码 优先级最高 -->
+  <properties resource="dataSource.properties"/>
+
   <!-- 别名 -->
+  <!-- alias 不区分大小写 -->
   <typeAliases>
-    <typeAlias type="com.fly.mybatis.Role" alias="Role"/>
+    <!--<typeAlias type="com.fly.mybatis.Role" alias="role"/>-->
+    <package name="com.fly.mybatis"/> <!-- 此种配置方法，会将类名的首字母小写作为别用使用
+                                            对于重名的类，可在类上使用 @Alias（name） 注解指定别名
+                                        -->
   </typeAliases>
 
   <!-- 数据源 -->
   <environments default="development">
     <environment id="development">
-      <transactionManager type="jdbc"/>
-      <dataSource type="pooled">
-        <property name="driver" value="com.mysql.jdbc.Driver"/>
-        <property name="username" value="root"/>
-        <property name="password" value="123456"/>
-        <property name="url" value="jdbc:mysql:///mysql"/>
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="url" value="${url}"/>
       </dataSource>
     </environment>
   </environments>
 
   <!-- 映射器 -->
- <!-- <mappers>
-    <mapper resource="com.fly.mybatis.RoleMapper.xml"/>
-  </mappers>-->
+  <mappers>
+    <!--<package name="com.fly.mybatis/*.xml"/>-->
+    <mapper class="com.fly.mybatis.RoleMapper"/>
+    <!--<mapper url="file:src/main/java/com/fly/mybatis/RoleMapper.xml"/>-->
+    <!--
+    resource 方式引入mapper.xml 不正确
+    -->
+    <!--<mapper resource="/com/fly/mybatis/RoleMapper.xml"/>-->
+  </mappers>
 
 </configuration>

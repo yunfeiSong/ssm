@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fly.mybatis.RoleMapper">
+
+  <resultMap id="role" type="Role">
+    <id property="id" column="id"/>
+    <result property="note" column="note"/>
+    <result property="roleName" column="role_name"/>
+  </resultMap>
+
+
+  <select id="getRole" parameterType="int" resultMap="role">
+    SELECT * FROM role WHERE id = #{id}
+  </select>
+</mapper>
