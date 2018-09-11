@@ -1,4 +1,4 @@
-package com.fly.proxy;
+package com.fly.reflect.proxy;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;

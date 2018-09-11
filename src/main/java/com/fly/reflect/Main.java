@@ -1,9 +1,8 @@
 package com.fly.reflect;
 
-import com.fly.proxy.CGLIBProxyExample;
-import com.fly.proxy.HelloWorld;
-import com.fly.proxy.HelloWorldImpl;
-import com.fly.proxy.JDKProxyExample;
+import com.fly.reflect.proxy.CGLIBProxyExample;
+import com.fly.reflect.proxy.HelloWorld;
+import com.fly.reflect.proxy.JDKProxyExample;
 
 import java.lang.reflect.Method;
 
@@ -32,7 +31,7 @@ public class Main {
     //JDKProxyExample jdkProxy = new JDKProxyExample();
     JDKProxyExample jdkProxy = null;
     try {
-      jdkProxy = (JDKProxyExample) Class.forName("com.fly.proxy.JDKProxyExample").newInstance();
+      jdkProxy = (JDKProxyExample) Class.forName("com.fly.reflect.proxy.JDKProxyExample").newInstance();
     } catch (Exception e) {
       e.printStackTrace();
     }

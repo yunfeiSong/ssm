@@ -1,6 +1,6 @@
 package com.fly.reflect;
 
-import com.fly.proxy.HelloWorld;
+import com.fly.reflect.proxy.HelloWorld;
 
 /**
  * @author : SongYF
@@ -16,7 +16,6 @@ public class ReflectServiceImpl implements HelloWorld{
     System.out.println("hello " + name);
   }
 
-  @Override
   public void sayHelloWorld() {
     System.out.println("ReflectServiceImpl HelloWorld");
   }

@@ -1,4 +1,4 @@
-package com.fly.proxy;
+package com.fly.reflect.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -6,7 +6,7 @@ import java.lang.reflect.Proxy;
 
 /**
  * @author : SongYF
- * @desc : HelloWorld 的代理对象 实现 InvocationHandler 接口
+ * @Desc : HelloWorld 的代理对象 实现 InvocationHandler 接口
  * @date : 2018/8/29
  * @Copyright (c) 2015 jigoon
  */

@@ -82,6 +82,21 @@
         <version>1.1.10</version>
       </dependency>
 
+      <!-- aspectJ aop -->
+      <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>1.9.1</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>1.9.1</version>
+      </dependency>
+
 
     </dependencies>
 </project>
