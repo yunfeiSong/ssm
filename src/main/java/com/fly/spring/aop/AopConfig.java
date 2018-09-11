@@ -1,4 +1,4 @@
-package com.fly.aop;
+package com.fly.spring.aop;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,11 +14,16 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan("com.fly.aop")
+@ComponentScan("com.fly.spring.aop")
 public class AopConfig {
 
   @Bean
-  public RoleAspect getRoleAspect() {
-    return new RoleAspect();
+  public RoleAspect1 getRoleAspect1() {
+    return new RoleAspect1();
+  }
+
+  @Bean
+  public RoleAspect2 getRoleAspect2() {
+    return new RoleAspect2();
   }
 }

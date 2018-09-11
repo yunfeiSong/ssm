@@ -1,6 +1,5 @@
-package com.fly.aop;
+package com.fly.spring.aop;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
