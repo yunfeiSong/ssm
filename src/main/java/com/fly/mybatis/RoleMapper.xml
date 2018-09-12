@@ -4,14 +4,50 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fly.mybatis.RoleMapper">
 
-  <resultMap id="role" type="Role">
+  <resultMap id="role" type="role">
     <id property="id" column="id"/>
     <result property="note" column="note"/>
-    <result property="roleName" column="role_name"/>
+    <!--
+        mybatis 提供的枚举类转换器有两种（都有局限性，并不常用）：
+        1、org.apache.ibatis.type.EnumTypeHandler，使用枚举类的变量名来进行匹配
+        2、org.apache.ibatis.type.EnumOrdinalTypeHandler，使用枚举类变量的下标（变量的顺序）进行匹配
+     -->
+    <!-- 使用自定义typeHandler 处理枚举类 此处使用了在 typeAliases 中配置的别名，如果未配置别名，则使用全限定名 -->
+    <result property="roleEnum" column="role_name" typeHandler="myTypeHandler"/>
   </resultMap>
 
 
   <select id="getRole" parameterType="int" resultMap="role">
-    SELECT * FROM role WHERE id = #{id}
+    SELECT *
+    FROM role
+    WHERE id = #{id}
   </select>
+
+  <!--开启主键回填，将mysql自动生成的id 赋给当前对象的 id 属性-->
+  <insert id="addRole" parameterType="role"> <!--useGeneratedKeys="true" keyProperty="id"-->
+    <!-- /*自定义主键生成规则*/
+     <selectKey keyProperty="id" resultType="int" order="BEFORE">
+       SELECT if (max(id) = null,1,max(id)+3 ) FROM role
+     </selectKey>-->
+
+    <!-- 主键回填，效果等同于设置 useGeneratedKeys -->
+    <selectKey keyProperty="id" resultType="int">
+      SELECT last_insert_id() AS id
+    </selectKey>
+
+    <!-- 对于枚举类的赋值，可以直接取枚举类的值，添加到数据库中，也可以使用配置 typeHandler 来直接插入枚举类 -->
+    INSERT INTO role(role_name,note) VALUES (#{roleEnum.value},#{note})
+    <!-- INSERT INTO role(role_name,note) VALUES (#{roleEnum,typeHandler=myTypeHandler},#{note}) -->
+  </insert>
+
+  <update id="modify" parameterType="role">
+    UPDATE role
+    SET role_name = #{roleEnum.value}, note = #{note}
+    WHERE id = #{id}
+  </update>
+
+  <delete id="remove" parameterType="int">
+    DELETE FROM role
+    WHERE id = #{id}
+  </delete>
 </mapper>

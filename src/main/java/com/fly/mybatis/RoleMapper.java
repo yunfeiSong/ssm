@@ -9,4 +9,10 @@ package com.fly.mybatis;
 public interface RoleMapper {
 
   Role getRole(int id);
+
+  void addRole(Role role);
+
+  void modify(Role role);
+
+  void remove(int id);
 }

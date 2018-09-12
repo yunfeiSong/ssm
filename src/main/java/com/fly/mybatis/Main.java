@@ -38,10 +38,17 @@ public class Main {
       sqlSession = sqlSessionFactory.openSession();
 
       RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
-      Role role = roleMapper.getRole(1);
+      Role role = roleMapper.getRole(3);
 
-      log.info(role.getRoleName());
+      log.info(role.getRoleEnum().getDesc());
 
+      Role newRole = new Role();
+      newRole.setNote("添加员工");
+      newRole.setRoleEnum(RoleEnum.Employee);
+      roleMapper.addRole(newRole);
+      newRole.setRoleEnum(RoleEnum.ChairMan);
+      roleMapper.modify(newRole);
+      roleMapper.remove(1);
       sqlSession.commit();
     } catch (Exception e) {
       e.printStackTrace();

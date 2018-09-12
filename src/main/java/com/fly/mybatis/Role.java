@@ -1,5 +1,7 @@
 package com.fly.mybatis;
 
+import java.io.Serializable;
+
 /**
  * @author : SongYF
  * @desc : Role 角色表实体类
@@ -8,10 +10,12 @@ package com.fly.mybatis;
  */
 
 
-public class Role {
+public class Role implements Serializable{
+
+  private static final long serialVersionUID = 3582032464867226659L;
 
   private int id;
-  private String roleName;
+  private RoleEnum roleEnum;
   private String note;
 
   public String getNote() {
@@ -30,13 +34,11 @@ public class Role {
     this.id = id;
   }
 
-  public String getRoleName() {
-    return roleName;
+  public RoleEnum getRoleEnum() {
+    return roleEnum;
   }
 
-  public void setRoleName(String roleName) {
-    this.roleName = roleName;
+  public void setRoleEnum(RoleEnum roleEnum) {
+    this.roleEnum = roleEnum;
   }
-
-
 }
