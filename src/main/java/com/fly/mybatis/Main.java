@@ -1,4 +1,5 @@
 package com.fly.mybatis;
+import java.util.Date;
 
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.io.Resources;
@@ -38,7 +39,11 @@ public class Main {
       sqlSession = sqlSessionFactory.openSession();
 
       RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
-      Role role = roleMapper.getRole(3);
+      RoleCountResult param = new RoleCountResult();
+      param.setNote("员工");
+      roleMapper.countRole(param);
+      System.out.println(param);
+      /*Role role = roleMapper.getRole(3);
 
       log.info(role.getRoleEnum().getDesc());
 
@@ -48,7 +53,7 @@ public class Main {
       roleMapper.addRole(newRole);
       newRole.setRoleEnum(RoleEnum.ChairMan);
       roleMapper.modify(newRole);
-      roleMapper.remove(1);
+      roleMapper.remove(1);*/
       sqlSession.commit();
     } catch (Exception e) {
       e.printStackTrace();
@@ -56,7 +61,6 @@ public class Main {
     } finally {
       sqlSession.close();
     }
-
   }
 
 
@@ -79,10 +83,7 @@ public class Main {
 
     configuration.addMapper(RoleMapper.class);
 
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
-
-
-    return sqlSessionFactory;
+    return new SqlSessionFactoryBuilder().build(configuration);
   }
 
 

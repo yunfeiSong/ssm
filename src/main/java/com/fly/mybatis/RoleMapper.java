@@ -15,4 +15,6 @@ public interface RoleMapper {
   void modify(Role role);
 
   void remove(int id);
+
+  void countRole(RoleCountResult roleCountResult);
 }

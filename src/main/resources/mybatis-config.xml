@@ -14,6 +14,11 @@
   <!-- 添加属性 方式三：硬编码 优先级最高 -->
   <properties resource="dataSource.properties"/>
 
+ <!-- <settings>
+    <setting name="EnabledCache" value="true"/>
+  </settings>
+-->
+
   <!-- 别名 -->
   <!-- alias 不区分大小写 -->
   <typeAliases>

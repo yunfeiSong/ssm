@@ -4,6 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fly.mybatis.RoleMapper">
 
+  <!--<cache/> --><!-- 开启二级缓存 -->
+
   <resultMap id="role" type="role">
     <id property="id" column="id"/>
     <result property="note" column="note"/>
@@ -14,6 +16,13 @@
      -->
     <!-- 使用自定义typeHandler 处理枚举类 此处使用了在 typeAliases 中配置的别名，如果未配置别名，则使用全限定名 -->
     <result property="roleEnum" column="role_name" typeHandler="myTypeHandler"/>
+
+    <!--
+        mybais 中的级联：3种，
+        1、discriminator(鉴别器)，选择器
+        2、association(一对一)
+        3、collection(一对多)
+    -->
   </resultMap>
 
 
@@ -50,4 +59,13 @@
     DELETE FROM role
     WHERE id = #{id}
   </delete>
+
+  <!-- 存储过程 统计同一类角色的数量 -->
+  <select id="countRole" parameterType="RoleCountResult" statementType="CALLABLE">
+    CALL countRole(
+      #{note,mode=IN,jdbcType=VARCHAR},
+      #{countTotal,mode=OUT,jdbcType=INTEGER},
+      #{execDate,mode=OUT,jdbcType=DATE}
+    )
+  </select>
 </mapper>
