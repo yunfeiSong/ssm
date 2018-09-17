@@ -12,12 +12,19 @@
   </properties>-->
   <!-- 添加属性 方式二：外部引入 推荐 -->
   <!-- 添加属性 方式三：硬编码 优先级最高 -->
-  <properties resource="dataSource.properties"/>
-
- <!-- <settings>
-    <setting name="EnabledCache" value="true"/>
+  <!--<properties resource="dataSource.properties"/>-->
+  <!-- settings 设置 -->
+  <settings>
+    <!-- 开启缓存 -->
+    <setting name="cacheEnabled" value="true"/>
+    <!-- 主键回填 -->
+    <setting name="useGeneratedKeys" value="true"/>
+    <!-- 延迟加载 -->
+    <setting name="lazyLoadingEnabled" value="true"/>
+    <!-- 数据库链接超时时间 -->
+    <setting name="defaultStatementTimeout" value="25000"/>
   </settings>
--->
+
 
   <!-- 别名 -->
   <!-- alias 不区分大小写 -->
@@ -41,20 +48,20 @@
 
 
   <!-- 数据源 -->
-  <environments default="development">
+ <!-- <environments default="development">
     <environment id="development">
-      <transactionManager type="JDBC"/> <!-- mybatis 事务的两种实现方式 -->
-      <!--<transactionManager type="MANAGED"/>-->
-      <dataSource type="POOLED"> <!-- 三种数据源 -->
-     <!-- <dataSource type="UNPOOLED">
-      <dataSource type="JNDI">-->
+      <transactionManager type="JDBC"/> &lt;!&ndash; mybatis 事务的两种实现方式 &ndash;&gt;
+      &lt;!&ndash;<transactionManager type="MANAGED"/>&ndash;&gt;
+      <dataSource type="POOLED"> &lt;!&ndash; 三种数据源 &ndash;&gt;
+     &lt;!&ndash; <dataSource type="UNPOOLED">
+      <dataSource type="JNDI">&ndash;&gt;
         <property name="driver" value="${driver}"/>
         <property name="username" value="${username}"/>
         <property name="password" value="${password}"/>
         <property name="url" value="${url}"/>
       </dataSource>
     </environment>
-  </environments>
+  </environments>-->
 
   <!-- 映射器 -->
   <mappers>

@@ -1,6 +1,7 @@
 package com.fly.spring;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.fly.mybatis.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -10,7 +11,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Component;
+
+import java.sql.SQLException;
 
 /**
  * @author : SongYF
@@ -29,11 +33,15 @@ public class Main {
   @Autowired
   private User user;
 
-  @Autowired
-  private DruidDataSource dataSource;
 
-  public static void main(String args[]) {
-    ApplicationContext ctx = null;//new ClassPathXmlApplicationContext("applicationContext.xml");
+  public static void main(String args[]) throws SQLException {
+
+    ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+    RoleMapper bean = ctx.getBean(RoleMapper.class);
+    com.fly.mybatis.Role role = bean.getRole(8);
+    System.out.println(role.getNote());
+//    SimpleDriverDataSource springDataSource = (SimpleDriverDataSource) ctx.getBean("springDataSource");
+//    System.out.println(springDataSource.getConnection());
     //DruidDataSource dataSource = (DruidDataSource) ctx.getBean("dataSource");
     //System.out.println(dataSource.getUrl());
     //User user = (User) ctx.getBean("com.fly.spring.User#0");//bean 无 id 时使用：全先顶名#数字
@@ -49,18 +57,18 @@ public class Main {
 //      System.out.println(user.getArrays()[0]);
 //    System.out.println(user);
 
-    ctx = new AnnotationConfigApplicationContext(PojoConfig.class);
+   /* ctx = new AnnotationConfigApplicationContext(PojoConfig.class);
     RoleService service = (RoleService) ctx.getBean("roleService1");
     Role role = ctx.getBean(Role.class);
     service.printRoleInfo(role);
     ELBean eLBean = (ELBean) ctx.getBean("eLBean");
-    System.out.println(eLBean);
+    System.out.println(eLBean);*/
 //    service.printRoleInfo();
 //    service.printRoleInfoAuto();
     //ctx.getBean(Main.class).roleService1.printRoleInfoAuto();
     //System.out.println(ctx.getBean(Main.class).user);
     //System.out.println(ctx.getBean(Main.class).dataSource.getUrl());
-    ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+    //ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class);
     //System.out.println(ctx.getEnvironment().getProperty("url"));
 
     /**

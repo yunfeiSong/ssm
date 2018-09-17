@@ -9,74 +9,131 @@
   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
- <!-- <bean class="com.fly.spring.User"
-        p:age="21"
-        p:name="张三"
-        p:note="setter注入，需要无参构造器"
-        p:lists-ref="list">
-    &lt;!&ndash;<property name="lists">
-      <list>
-        <value>1</value>
-        <value>2</value>
-        <value>3</value>
-      </list>
-    </property>&ndash;&gt;
-    <property name="sets">
-      <set>
-        <value>1</value>
-        <value>2</value>
-        <value>3</value>
-      </set>
-    </property>
-    <property name="maps">
-      <map>
-        <entry key="1" value="1"/>
-        <entry key="2" value="2"/>
-        <entry key="3" value="3"/>
-      </map>
-    </property>
-    <property name="pros">
-      <props>
-        <prop key="1">1</prop>
-        <prop key="2">2</prop>
-        <prop key="3">3</prop>
-      </props>
-    </property>
-    <property name="arrays">
-      <array>
-        <value>1</value>
-        <value>2</value>
-        <value>3</value>
-      </array>
-    </property>
-    &lt;!&ndash;<property name="role">
-      <list>
-        <ref bean="role1"/>
-        <ref bean="role2"/>
-      </list>
-    </property>
-    <property name="maps2">
-      <map>
-        <entry key-ref="role1" value-ref="user1"/>
-        <entry key-ref="role2" value-ref="user1"/>
-      </map>
-    </property>&ndash;&gt;
+  <!-- 引入资源文件 -->
+  <!-- system-properties-mode 属性指定查找文件的位置，默认为 environment 系统环境变量，所以不加配置则不能使用 ${username} 之类的和系统环境变量重名的变量名 ，设置为NEVER 或者 FALLBACK 可只查找类路径下，即可使用 ${username} 等变量名-->
+  <context:property-placeholder location="classpath:dataSource.properties" file-encoding="UTF-8"
+                                ignore-resource-not-found="true"/><!--system-properties-mode="NEVER"-->
+
+  <!-- 配置数据源 -->
+  <!-- 变量名最好加有前缀，防止没有配置 property-placeholder 的 system-properties-mode 属性时，引用了系统的环境变量 -->
+  <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+    <property name="username" value="${jdbc_username}"/>
+    <property name="password" value="${jdbc_password}"/>
+    <property name="url" value="${jdbc_url}"/>
+    <property name="driverClassName" value="${jdbc_driver}"/>
   </bean>
 
-  <bean id="user1" class="com.fly.spring.User" p:name="李四" p:note="lili" p:age="55"/>
-&lt;!&ndash;############## util 应用 ####################&ndash;&gt;
-  <util:list id="list">
-    <value>1</value>
-    <value>2</value>
-    <value>3</value>
-  </util:list>-->
-<!--#############################################-->
- <!-- <bean id="role1" class="com.fly.spring.Role"
-        p:name="经理"
-        p:lev="1"/>
-  <bean id="role2" class="com.fly.spring.Role"
-        p:name="文员"
-        p:lev="2"/>-->
+  <!-- 配置 sqlSessionFactory ，生成 sqlSession 工厂实例 -->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+        p:configLocation="classpath:mybatis-config.xml"
+        p:dataSource-ref="dataSource"/>
+
+  <!-- sqlSessionTemplate 模板，提供了 insert（） update（） delete（） selectOne（） selectList（） 等方法，方法中参数为sql的id和对应参数 ，逐渐已过时 -->
+  <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+    <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    <constructor-arg name="executorType" value="SIMPLE"/>
+  </bean>
+
+  <!-- 配置映射器 mapper 工厂类实例，将 mapper 接口实例化为 bean，可通过 ApplicationContext.getBean("") 或 @autoWired 使用对应的 mapper 映射器-->
+  <!-- 该实例只能配置一个 mapper 映射器 ， 生产中长使用扫描的方式进行配置 MapperScannerConfigurer -->
+  <!--<bean id="mapperFactoryBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.fly.mybatis.RoleMapper"/>
+    &lt;!&ndash; 同时配置 sqlSessionFactory 和 sqlSessionTemplate ,则只会启用 sqlSessionTemplate &ndash;&gt;
+    &lt;!&ndash;<property name="sqlSessionFactory" ref="sqlSessionFactory"/>&ndash;&gt;
+    <property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+  </bean>-->
+
+  <!-- 将 mapper 映射器扫描并实例化，实现接口的实例化 （多个）-->
+  <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <!-- 指定扫描包，多个用 ，号隔开 -->
+    <property name="basePackage" value="com.fly.mybatis"/>
+    <!-- 使用此方式时，需指定一个父接口，凡继承父接口的映射器均可被扫描并实例化，不推荐使用 -->
+   <!-- <property name="markerInterface" value="com.fly.mybatis.BaseMapper"/>-->
+    <!-- 使用此方式时，需在 mapper 映射器加对应的注解 ，该映射器才能被扫描到，注解可任意指定，推荐 @Repository 注解 -->
+    <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    <!-- 配置 sqlSessionTemplateBeanName 时，sqlSessionFactoryBeanName 不再生效 -->
+    <!--<property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>-->
+  </bean>
+
+
+  <!-- spring jdbc 数据源 不支持连接池-->
+  <!-- <bean id="springDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+     <property name="url" value="jdbc:mysql:///test_song"/>
+     <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+     <property name="password" value="123456"/>
+     <property name="username" value="root"/>
+   </bean>
+ -->
+
+  <!-- <bean class="com.fly.spring.User"
+         p:age="21"
+         p:name="张三"
+         p:note="setter注入，需要无参构造器"
+         p:lists-ref="list">
+     &lt;!&ndash;<property name="lists">
+       <list>
+         <value>1</value>
+         <value>2</value>
+         <value>3</value>
+       </list>
+     </property>&ndash;&gt;
+     <property name="sets">
+       <set>
+         <value>1</value>
+         <value>2</value>
+         <value>3</value>
+       </set>
+     </property>
+     <property name="maps">
+       <map>
+         <entry key="1" value="1"/>
+         <entry key="2" value="2"/>
+         <entry key="3" value="3"/>
+       </map>
+     </property>
+     <property name="pros">
+       <props>
+         <prop key="1">1</prop>
+         <prop key="2">2</prop>
+         <prop key="3">3</prop>
+       </props>
+     </property>
+     <property name="arrays">
+       <array>
+         <value>1</value>
+         <value>2</value>
+         <value>3</value>
+       </array>
+     </property>
+     &lt;!&ndash;<property name="role">
+       <list>
+         <ref bean="role1"/>
+         <ref bean="role2"/>
+       </list>
+     </property>
+     <property name="maps2">
+       <map>
+         <entry key-ref="role1" value-ref="user1"/>
+         <entry key-ref="role2" value-ref="user1"/>
+       </map>
+     </property>&ndash;&gt;
+   </bean>
+
+   <bean id="user1" class="com.fly.spring.User" p:name="李四" p:note="lili" p:age="55"/>
+ &lt;!&ndash;############## util 应用 ####################&ndash;&gt;
+   <util:list id="list">
+     <value>1</value>
+     <value>2</value>
+     <value>3</value>
+   </util:list>-->
+  <!--#############################################-->
+  <!-- <bean id="role1" class="com.fly.spring.Role"
+         p:name="经理"
+         p:lev="1"/>
+   <bean id="role2" class="com.fly.spring.Role"
+         p:name="文员"
+         p:lev="2"/>-->
 
   <!-- <bean id="user1" class="com.fly.spring.User" p:age="21" p:name="张三" p:note="setter注入，需要无参构造器"/>-->
 
@@ -93,15 +150,10 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     </bean>
   -->
 
- <!-- <context:component-scan base-package="com.fly"/>
-  <context:property-placeholder location="classpath:dataSource.properties" ignore-resource-not-found="true" file-encoding="UTF-8"/>
--->
-  <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-    <property name="username" value="${username}" />
-    <property name="password" value="${password}" />
-    <property name="url" value="${url}" />
-    <property name="driverClassName" value="${driver}" />
-  </bean>-->
+  <!-- <context:component-scan base-package="com.fly"/>
+
+ -->
+
 
   <!--<mvc:annotation-driven/>
   <mvc:default-servlet-handler/>

@@ -1,12 +1,16 @@
 package com.fly.mybatis;
 
+import org.springframework.stereotype.Repository;
+
 /**
  * @author : SongYF
  * @desc :
  * @date : 2018/9/11
  * @Copyright (c) 2015 jigoon
  */
-public interface RoleMapper {
+
+@Repository
+public interface RoleMapper extends BaseMapper{
 
   Role getRole(int id);
 
