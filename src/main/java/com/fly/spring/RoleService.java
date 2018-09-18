@@ -4,7 +4,6 @@ package com.fly.spring;
  * @author : SongYF
  * @desc :
  * @date : 2018/9/5
- * @Copyright (c) 2015 jigoon
  */
 public interface RoleService {
   /**

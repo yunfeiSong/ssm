@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
  * @author : SongYF
  * @desc :
  * @date : 2018/9/6
- * @Copyright (c) 2015 jigoon
  */
 
 @Component("roleService2")

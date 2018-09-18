@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
  * @author : SongYF
  * @desc : 角色表
  * @date : 2018/9/5
- * @Copyright (c) 2015 jigoon
  */
 
 @Component

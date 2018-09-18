@@ -11,7 +11,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  * @author : SongYF
  * @desc : 配置类，扫描器+资源文件定位
  * @date : 2018/9/7
- * @Copyright (c) 2015 jigoon
  */
 
 @Configuration

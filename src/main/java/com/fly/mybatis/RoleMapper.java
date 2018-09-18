@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
  * @author : SongYF
  * @desc :
  * @date : 2018/9/11
- * @Copyright (c) 2015 jigoon
  */
 
 @Repository

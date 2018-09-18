@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
  * @author : SongYF
  * @desc : 测试 EL 表达式及引用外部 bean
  * @date : 2018/9/10
- * @Copyright (c) 2015 jigoon
  */
 
 @Component("eLBean")

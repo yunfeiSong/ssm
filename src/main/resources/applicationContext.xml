@@ -3,11 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
   <!-- 引入资源文件 -->
   <!-- system-properties-mode 属性指定查找文件的位置，默认为 environment 系统环境变量，所以不加配置则不能使用 ${username} 之类的和系统环境变量重名的变量名 ，设置为NEVER 或者 FALLBACK 可只查找类路径下，即可使用 ${username} 等变量名-->
@@ -48,13 +47,21 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <!-- 指定扫描包，多个用 ，号隔开 -->
     <property name="basePackage" value="com.fly.mybatis"/>
     <!-- 使用此方式时，需指定一个父接口，凡继承父接口的映射器均可被扫描并实例化，不推荐使用 -->
-   <!-- <property name="markerInterface" value="com.fly.mybatis.BaseMapper"/>-->
+    <!-- <property name="markerInterface" value="com.fly.mybatis.BaseMapper"/>-->
     <!-- 使用此方式时，需在 mapper 映射器加对应的注解 ，该映射器才能被扫描到，注解可任意指定，推荐 @Repository 注解 -->
     <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
     <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     <!-- 配置 sqlSessionTemplateBeanName 时，sqlSessionFactoryBeanName 不再生效 -->
     <!--<property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>-->
   </bean>
+
+  <!-- 事务管理器 ，需设置需要管理的数据源 -->
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+
+  <!-- 开启事务注解驱动 -->
+  <tx:annotation-driven transaction-manager="transactionManager"/>
 
 
   <!-- spring jdbc 数据源 不支持连接池-->
