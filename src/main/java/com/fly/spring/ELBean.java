@@ -2,6 +2,7 @@ package com.fly.spring;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import com.fly.mybatis.Role;
 
 /**
  * @author : SongYF
@@ -16,7 +17,7 @@ public class ELBean {
   private Role role;
 
   //@Value("#{role.getName()?.toString()}") // EL 表达式注入方法,? 号，表示判断是否为空，是就调用toString（） 方法
-  @Value("#{role.getName() eq null ? '默认': role.getName()}") //EL 中可以使用三目运算符
+  //@Value("#{role.getName() eq null ? '默认': role.getName()}") //EL 中可以使用三目运算符
   private String name;
 
   @Value("#{T(Math).PI}") // 调用静态变量或静态方法 需加 T()
@@ -25,11 +26,11 @@ public class ELBean {
   @Value("#{T(Math).random()}")
   private double random;
 
-  @Value("#{role.getName()+role.getLev()}") // EL 中允许使用 + 进行拼接 ，同时可进行 运算和比较大小
+  //@Value("#{role.getName()+role.getLev()}") // EL 中允许使用 + 进行拼接 ，同时可进行 运算和比较大小
   private String toString;
 
   //@Value("#{'董事长' eq role.getName()}") // 比较相等可以使用 eq 或 ==
-  @Value("#{'董事长' == role.getName()}")
+  //@Value("#{'董事长' == role.getName()}")
   private boolean eq;
 
   @Override

@@ -1,6 +1,9 @@
 package com.fly.spring;
 
 import org.springframework.stereotype.Component;
+import com.fly.mybatis.Role;
+
+import java.util.ArrayList;
 
 /**
  * @author : SongYF
@@ -20,5 +23,13 @@ public class RoleServiceImpl2 implements RoleService {
 
   public void printRoleInfoAuto() {
     System.out.println("impl2实例化");
+  }
+
+  public void addRole(Role role) {
+
+  }
+
+  public void addListRole(ArrayList<Role> roles) {
+
   }
 }

@@ -9,7 +9,6 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * @author : SongYF
  * @desc : 加载 Bean 的条件，返回true则加载，false则不加载
  * @date : 2018/9/7
- * @Copyright (c) 2015 jigoon
  */
 
 

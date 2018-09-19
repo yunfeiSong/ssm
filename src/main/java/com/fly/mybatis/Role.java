@@ -1,5 +1,7 @@
 package com.fly.mybatis;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
 /**
@@ -8,7 +10,7 @@ import java.io.Serializable;
  * @date : 2018/9/11
  */
 
-
+@Component
 public class Role implements Serializable{
 
   private static final long serialVersionUID = 3582032464867226659L;

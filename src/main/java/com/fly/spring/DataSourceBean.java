@@ -16,7 +16,7 @@ import java.util.Properties;
  * @Copyright (c) 2015 jigoon
  */
 
-@Component
+//@Component
 public class DataSourceBean {
   @Value("${driver}")
   private String driverClassName;

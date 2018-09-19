@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
  * @date : 2018/9/5
  */
 
-@Component
 public class Role {
   //@Value("董事长")
 //  @Value("#{'董事长'}")// EL 表达式的方式，赋值

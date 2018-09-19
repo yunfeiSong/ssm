@@ -8,6 +8,11 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
+  <context:annotation-config/>
+
+  <context:component-scan base-package="com.fly"/>
+
+
   <!-- 引入资源文件 -->
   <!-- system-properties-mode 属性指定查找文件的位置，默认为 environment 系统环境变量，所以不加配置则不能使用 ${username} 之类的和系统环境变量重名的变量名 ，设置为NEVER 或者 FALLBACK 可只查找类路径下，即可使用 ${username} 等变量名-->
   <context:property-placeholder location="classpath:dataSource.properties" file-encoding="UTF-8"
@@ -51,6 +56,8 @@
     <!-- 使用此方式时，需在 mapper 映射器加对应的注解 ，该映射器才能被扫描到，注解可任意指定，推荐 @Repository 注解 -->
     <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
     <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    <!-- 过时的属性 sqlSessionFactory -->
+    <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
     <!-- 配置 sqlSessionTemplateBeanName 时，sqlSessionFactoryBeanName 不再生效 -->
     <!--<property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>-->
   </bean>

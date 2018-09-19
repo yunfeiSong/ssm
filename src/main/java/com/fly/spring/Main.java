@@ -1,7 +1,8 @@
 package com.fly.spring;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.fly.mybatis.*;
+import com.fly.mybatis.RoleEnum;
+import com.fly.mybatis.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -14,13 +15,14 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Component;
 
+import javax.management.relation.RoleList;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * @author : SongYF
  * @desc :
  * @date : 2018/9/5
- * @Copyright (c) 2015 jigoon
  */
 
 @Component
@@ -28,7 +30,11 @@ public class Main {
 
   @Autowired//默认以 byType 类型注入 bean ，当注入的是接口有多个实现类时，按参数名和类的别名相匹配
   //@Qualifier("roleService2")//多个类继承自一个接口时，qualifier 指定固定别名的类实例化
-  private RoleService roleService1 = null;
+  private RoleService roleService1;
+//  private static RoleService roleService1; 不能注入静态变量
+
+  @Autowired
+  private RoleListService roleListService;
 
   @Autowired
   private User user;
@@ -37,9 +43,34 @@ public class Main {
   public static void main(String args[]) throws SQLException {
 
     ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-    RoleMapper bean = ctx.getBean(RoleMapper.class);
-    com.fly.mybatis.Role role = bean.getRole(8);
-    System.out.println(role.getNote());
+
+    RoleService roleService = (RoleService) ctx.getBean("roleService1");
+
+    ArrayList<Role> roles = new ArrayList<Role>();
+    for(int i=0;i<3;i++){
+      Role role = new Role();
+      role.setRoleEnum(RoleEnum.ChairMan);
+      role.setNote("事务-主席"+i);
+      roles.add(role);
+
+    }
+
+    roleService.addListRole(roles);
+
+    Role role2 = new Role();
+    role2.setRoleEnum(RoleEnum.Manager);
+    role2.setNote("事务-经理");
+    roles.clear();
+    roles.add(role2);
+    roleService.addListRole(roles);
+
+
+
+
+//    ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+//    RoleMapper bean = ctx.getBean(RoleMapper.class);
+//    com.fly.mybatis.Role role = bean.getRole(8);
+//    System.out.println(role.getNote());
 //    SimpleDriverDataSource springDataSource = (SimpleDriverDataSource) ctx.getBean("springDataSource");
 //    System.out.println(springDataSource.getConnection());
     //DruidDataSource dataSource = (DruidDataSource) ctx.getBean("dataSource");

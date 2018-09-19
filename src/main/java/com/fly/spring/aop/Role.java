@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @Copyright (c) 2015 jigoon
  */
 
-@Component
 public class Role {
   private String name;
   private String lev;

@@ -22,10 +22,10 @@ import java.util.Properties;
  * @Author : SongYF
  * @Date : 2018/9/17 17:16
  */
-@Configuration//标识为 java 配置类
-@EnableTransactionManagement //开启事务管理
-@ComponentScan(basePackages = "com.fly.transaction") //基本扫描包
-@PropertySource(value = "classpath:dataSource.properties")
+//@Configuration//标识为 java 配置类
+//@EnableTransactionManagement //开启事务管理
+//@ComponentScan(basePackages = "com.fly.transaction") //基本扫描包
+//@PropertySource(value = "classpath:dataSource.properties")
 public class JavaConfig{
   /**
    * 解析占位符 ${}
