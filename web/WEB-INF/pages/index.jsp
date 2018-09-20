@@ -4,6 +4,7 @@
     <title>$Title$</title>
   </head>
   <body>
+  <h1>spring MVC</h1>
  <a>index</a>
   </body>
 </html>
