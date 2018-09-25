@@ -14,7 +14,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  */
 
 //@Configuration
-//@ComponentScan(basePackages = "com.fly.spring")
+//@ComponentScan(basePackages = "com.*")
 //@PropertySource(value = "classpath:dataSource.properties"/* , ignoreResourceNotFound = true*/)
 public class ApplicationConfig {
 

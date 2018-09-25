@@ -140,6 +140,22 @@
       <version>4.3.18.RELEASE</version>
     </dependency>
 
+    <!-- JSTL 标签库 -->
+    <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <!-- jackson-databind 依赖于 jackson-core 和 jackson-annotations -->
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.6</version>
+    </dependency>
+
   </dependencies>
 
   <build>

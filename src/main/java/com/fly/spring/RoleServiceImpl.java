@@ -6,6 +6,7 @@ import com.fly.mybatis.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * @date : 2018/9/5
  */
 
-@Component("roleService1")
+@Service("roleService1")
 /*
 * ★★★★★
 * @transactional 注解在静态方法和非 public 方法之上 无效，自调用：在类自身中，一个方法调用另一个方法也无效
