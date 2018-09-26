@@ -20,6 +20,8 @@ public interface RoleService {
 
   void addRole(Role role);
 
+  Role getRole(int id);
+
 
   void addListRole(ArrayList<Role> roles);
 

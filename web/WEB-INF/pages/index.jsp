@@ -5,6 +5,6 @@
   </head>
   <body>
   <h1>spring MVC</h1>
- <a>index</a>
+ <a href="${pageContext.request.contextPath}/con/getRole/10.do">redirectToRole</a>
   </body>
 </html>

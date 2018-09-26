@@ -42,4 +42,13 @@ public class Role implements Serializable{
   public void setRoleEnum(RoleEnum roleEnum) {
     this.roleEnum = roleEnum;
   }
+
+  @Override
+  public String toString() {
+    return "Role{" +
+      "id=" + id +
+      ", roleEnum=" + roleEnum +
+      ", note='" + note + '\'' +
+      '}';
+  }
 }

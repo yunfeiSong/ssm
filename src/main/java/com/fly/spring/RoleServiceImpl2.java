@@ -29,6 +29,10 @@ public class RoleServiceImpl2 implements RoleService {
 
   }
 
+  public Role getRole(int id) {
+    return null;
+  }
+
   public void addListRole(ArrayList<Role> roles) {
 
   }

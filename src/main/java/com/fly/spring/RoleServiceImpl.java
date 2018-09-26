@@ -65,11 +65,11 @@ public class RoleServiceImpl implements RoleService {
   private RoleService roleService1;
 
   @Autowired//采用setter注入需要的 bean
-  private void setRole(Role role){
+  private void setRole(Role role) {
     this.role = role;
   }
 
-  public void printRoleInfoAuto(){
+  public void printRoleInfoAuto() {
     System.out.println(role);
   }
 
@@ -78,9 +78,13 @@ public class RoleServiceImpl implements RoleService {
     roleMapper.addRole(role);
   }
 
+  public Role getRole(int id) {
+    return roleMapper.getRole(id);
+  }
+
   @Transactional(propagation = Propagation.REQUIRED)
   public void addListRole(ArrayList<Role> roles) {
-    for(Role r : roles){
+    for (Role r : roles) {
       roleService1.addRole(r);
       /* 发生除零异常后，只回滚当前方法 */
      /* Role role1 = new Role();
