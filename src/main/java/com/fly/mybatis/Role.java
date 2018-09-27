@@ -1,5 +1,6 @@
 package com.fly.mybatis;
 
+import com.sun.istack.internal.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -11,12 +12,14 @@ import java.io.Serializable;
  */
 
 @Component
-public class Role implements Serializable{
+public class Role implements Serializable {
 
   private static final long serialVersionUID = 3582032464867226659L;
 
   private int id;
+
   private RoleEnum roleEnum;
+
   private String note;
 
   public String getNote() {

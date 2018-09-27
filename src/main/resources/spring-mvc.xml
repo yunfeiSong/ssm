@@ -15,4 +15,17 @@
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
         p:suffix=".jsp" p:prefix="/WEB-INF/pages/"/>
 
+  <!-- 拦截器配置
+      当存在多个拦截器时，多个拦截器的执行为 责任链 模式，
+      preHandle（）方法正序执行，postHandle（）和 afterCompletion() 方法逆序执行
+      拦截器的 preHandle() 方法返回 true ，则其 afterCompletion（）方法一定会执行,
+      ★★★ 其 postHandle（）方法，要看第二个拦截器的 prHandle（）方法返回是否为 true
+  -->
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/con/*.do"/>
+      <bean class="com.fly.interceptor.RoleInterceptor"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
+
 </beans>

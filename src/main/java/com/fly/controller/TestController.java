@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
  */
 @Controller("common")
 @RequestMapping("/con")
+@SessionAttributes(names = {"id"}, types = {Role.class})
 public class TestController {
 
   @Autowired
@@ -46,14 +48,35 @@ public class TestController {
       required 默认为 true 不允许参数为空，如果为空会抛出异常
       defaultValue 参数默认值
 
+      @RequestAttribute
+      作用于方法签名中的注解
+      从 request 对象中获取指定参数，不能为空，可指定 required 属性为 false 来允许参数为空
+
       @SessionAttribute
-      从 session 中获取对应名称的参数
+      作用于方法签名中的注解
+      从 session 中获取对应名称的参数，不能为空，可指定 required 属性为 false 来允许参数为空
+
+      @SessionAttributes
+      作用于类上的注解
+      将指定参数放入 session 对象中，names 属性为数组，指定要放入的参数名，types 属性也是数组，指定参数对应的对象
+
+      @CookieValue
+      从 cookie 中获取参数，不能为空
+
+      @RequestHeader
+      从请求头中获取参数，不能为空
+
    */
-  public ModelAndView index(@RequestParam(value = "id", required = false, defaultValue = "0") Long id, @SessionAttribute(value = "userName", required = false) String userName) {
+  public ModelAndView index(@RequestParam(value = "id", required = false, defaultValue = "0") Long id, @SessionAttribute(value = "userName", required = false) String userName, @RequestAttribute(value = "attr", required = false) String attr,
+                            @CookieValue(value = "JSESSIONID", required = false, defaultValue = "MyJsessionId") String jsessionId,
+                            @RequestHeader(value = "User-Agent", required = false, defaultValue = "attr") String userAgent) {
 
     System.out.println("收到的参数id：" + id);
 
     ModelAndView modelAndView = new ModelAndView();
+
+    modelAndView.addObject("jsessionId", jsessionId);
+    modelAndView.addObject("userAgent", userAgent);
 
     modelAndView.setViewName("index");//设置要返回的 jsp 名称
 
@@ -62,7 +85,7 @@ public class TestController {
 
   //@ResponseBody
   @RequestMapping("/addListRole.do")
-  public ModelAndView addListRole() {
+  public ModelAndView addListRole(ModelMap modelMap, Model model) {
     ModelAndView modelAndView = new ModelAndView();
 
     Role role = new Role();
@@ -70,7 +93,13 @@ public class TestController {
     role.setNote("控制器中添加");
     roleService1.addRole(role);
 
+    /*
+      model 和 modelMap 初始化的实例都是  BindingAwareModelMap 对象 ，
+      使用 modelAndView 的 addObject() 方法和 model、modelMap 都可以传递参数至视图层
+     */
     modelAndView.addObject("role", role);//添加参数传递至视图层
+//    modelMap.addAttribute("role", role);
+//    model.addAttribute("role", role);
 
     //返回对象
     modelAndView.setViewName("roleList");//设置要返回的 jsp 名称
@@ -111,11 +140,11 @@ public class TestController {
 
 
   @RequestMapping("/showRoleInfo.do")
-  public ModelAndView showRoleInfo(Role role){
+  public ModelAndView showRoleInfo(Role role) {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setView(new MappingJackson2JsonView());
 
-    modelAndView.addObject("role",role);
+    modelAndView.addObject("role", role);
 
     return modelAndView;
   }
@@ -123,11 +152,11 @@ public class TestController {
   @RequestMapping("/addRole.do")
   /*
      RedirectAttributes
-     在重定向中加入 pojo 类型参数，使用其 addFlashAttributes（） 方法，将 pojo 放于 session中，待重定向结束，将 pojo 从 session 中删除
+     在重定向中加入 pojo 类型参数，使用其 addFlashAttributes（） 方法，将 pojo（Java 对象） 放于 session中，待重定向结束，将 pojo 从 session 中删除
 
      ★★★ 测试时需从浏览器访问 URL ，idea 自带的 REST Client 不能进行重定向
    */
-  public String addRole(Model model, RedirectAttributes rs){
+  public String addRole(Model model, RedirectAttributes rs) {
 
     Role role = new Role();
     role.setNote("测试重定向");
