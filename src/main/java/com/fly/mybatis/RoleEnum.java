@@ -25,16 +25,8 @@ public enum RoleEnum {
     return value;
   }
 
-  public void setValue(int value) {
-    this.value = value;
-  }
-
   public String getDesc() {
     return desc;
-  }
-
-  public void setDesc(String desc) {
-    this.desc = desc;
   }
 
   public static RoleEnum getByValue(int value) {

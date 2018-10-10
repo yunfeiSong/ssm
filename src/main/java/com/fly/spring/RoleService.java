@@ -1,6 +1,5 @@
 package com.fly.spring;
 
-import com.fly.mybatis.RoleCountResult;
 import com.fly.mybatis.Role;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public interface RoleService {
   public void printRoleInfo();
   public void printRoleInfoAuto();
 
-  void addRole(Role role);
+  Role addRole(Role role);
 
   Role getRole(int id);
 

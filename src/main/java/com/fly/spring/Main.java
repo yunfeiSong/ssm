@@ -56,13 +56,13 @@ public class Main {
     }
 
     roleService.addListRole(roles);
-
-    Role role2 = new Role();
-    role2.setRoleEnum(RoleEnum.Manager);
-    role2.setNote("事务-经理");
-    roles.clear();
-    roles.add(role2);
-    roleService.addListRole(roles);
+//
+//    Role role2 = new Role();
+//    role2.setRoleEnum(RoleEnum.Manager);
+//    role2.setNote("事务-经理");
+//    roles.clear();
+//    roles.add(role2);
+//    roleService.addListRole(roles);
 
 
 

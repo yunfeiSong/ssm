@@ -25,8 +25,8 @@ public class RoleServiceImpl2 implements RoleService {
     System.out.println("impl2实例化");
   }
 
-  public void addRole(Role role) {
-
+  public Role addRole(Role role) {
+    return role;
   }
 
   public Role getRole(int id) {

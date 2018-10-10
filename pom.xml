@@ -156,6 +156,23 @@
       <version>2.9.6</version>
     </dependency>
 
+    <!-- jedis client -->
+    <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
+    <!-- 需注意与 spring-data-redis 和 jedis 的版本兼容性问题 -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-redis</artifactId>
+      <version>1.7.0.RELEASE</version>
+    </dependency>
+
+
   </dependencies>
 
   <build>

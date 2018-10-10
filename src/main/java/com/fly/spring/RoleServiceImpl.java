@@ -1,13 +1,10 @@
 package com.fly.spring;
 
-import com.fly.mybatis.RoleEnum;
 import com.fly.mybatis.RoleMapper;
 import com.fly.mybatis.Role;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,8 +71,13 @@ public class RoleServiceImpl implements RoleService {
   }
 
   @Transactional(propagation = Propagation.REQUIRES_NEW)
-  public void addRole(Role role) {
+  @CachePut(value = "redisCacheManager", key = "'cache_put_role_'+#result.id")
+//  开启缓存，value 指定缓存器，key 指定保存所用的名称
+//  #result 为 spring 和 redis 的约定，代表引用方法的返回值，
+//  也可以通过，#参数名，引用方法签名中的参数
+  public Role addRole(Role role) {
     roleMapper.addRole(role);
+    return role;
   }
 
   public Role getRole(int id) {
@@ -83,6 +85,7 @@ public class RoleServiceImpl implements RoleService {
   }
 
   @Transactional(propagation = Propagation.REQUIRED)
+  //注意的是，调用该方法，并不会触发该类中 addRole（）方法，这里产生了自调用问题，缓存本质基于 spring 的 AOP 所以自身不能代理自身
   public void addListRole(ArrayList<Role> roles) {
     for (Role r : roles) {
       roleService1.addRole(r);
