@@ -1,7 +1,7 @@
 package com.fly.spring;
 
-import com.fly.mybatis.RoleMapper;
 import com.fly.mybatis.Role;
+import com.fly.mybatis.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;

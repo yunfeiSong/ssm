@@ -1,7 +1,5 @@
 package com.fly.spring.aop;
 
-import org.springframework.stereotype.Component;
-
 /**
  * @author : SongYF
  * @desc : 角色表

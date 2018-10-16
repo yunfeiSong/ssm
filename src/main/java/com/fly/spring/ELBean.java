@@ -1,8 +1,8 @@
 package com.fly.spring;
 
+import com.fly.mybatis.Role;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import com.fly.mybatis.Role;
 
 /**
  * @author : SongYF

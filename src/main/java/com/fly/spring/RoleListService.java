@@ -1,7 +1,5 @@
 package com.fly.spring;
 
-import com.fly.mybatis.*;
-
 import java.util.ArrayList;
 
 /**

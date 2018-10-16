@@ -1,7 +1,7 @@
 package com.fly.spring;
 
-import org.springframework.stereotype.Component;
 import com.fly.mybatis.Role;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 

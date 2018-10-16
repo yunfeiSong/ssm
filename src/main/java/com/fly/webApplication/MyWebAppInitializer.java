@@ -1,7 +1,5 @@
 package com.fly.webApplication;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
 /**
  * @Desc : 注解方式配置 web 应用中的 spring IOC 和 spring MVC
  * @Author : SongYF

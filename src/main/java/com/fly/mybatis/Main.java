@@ -1,5 +1,4 @@
 package com.fly.mybatis;
-import java.util.Date;
 
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.io.Resources;

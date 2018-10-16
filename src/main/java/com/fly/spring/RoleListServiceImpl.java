@@ -1,7 +1,7 @@
 package com.fly.spring;
 
-import com.fly.mybatis.*;
 import com.fly.mybatis.Role;
+import com.fly.mybatis.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

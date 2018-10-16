@@ -1,21 +1,13 @@
 package com.fly.spring;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.fly.mybatis.RoleEnum;
 import com.fly.mybatis.Role;
+import com.fly.mybatis.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.expression.Expression;
-import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Component;
 
-import javax.management.relation.RoleList;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

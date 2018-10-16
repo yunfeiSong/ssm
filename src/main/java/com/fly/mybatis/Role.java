@@ -1,6 +1,5 @@
 package com.fly.mybatis;
 
-import com.sun.istack.internal.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;

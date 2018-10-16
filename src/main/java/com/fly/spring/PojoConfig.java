@@ -1,8 +1,5 @@
 package com.fly.spring;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-
 /**
  * @author : SongYF
  * @desc : 扫描器，默认扫描文件本包
