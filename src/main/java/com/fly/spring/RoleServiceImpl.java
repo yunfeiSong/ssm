@@ -85,7 +85,7 @@ public class RoleServiceImpl implements RoleService {
   }
 
   @Transactional(propagation = Propagation.REQUIRED)
-  //注意的是，调用该方法，并不会触发该类中 addRole（）方法，这里产生了自调用问题，缓存本质基于 spring 的 AOP 所以自身不能代理自身
+  //注意的是，调用该方法，并不会触发该类中 addRole（）方法的缓存机制，这里产生了自调用问题，缓存本质基于 spring 的 AOP 所以自身不能代理自身
   public void addListRole(ArrayList<Role> roles) {
     for (Role r : roles) {
       roleService1.addRole(r);
