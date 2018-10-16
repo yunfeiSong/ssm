@@ -200,6 +200,11 @@
           <encoding>utf-8</encoding>
         </configuration>
       </plugin>
+
+      <plugin>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.7</version>
+      </plugin>
     </plugins>
   </build>
 </project>
