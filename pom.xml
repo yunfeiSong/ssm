@@ -9,7 +9,6 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-
   <dependencies>
     <!-- CGLIB反响代理 -->
     <!-- https://mvnrepository.com/artifact/cglib/cglib -->
@@ -26,16 +25,12 @@
       <artifactId>spring-context</artifactId>
       <version>4.3.18.RELEASE</version>
     </dependency>
-
-
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
       <version>4.3.18.RELEASE</version>
     </dependency>
-
-
     <!-- spring mvc -->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
     <dependency>
@@ -187,11 +182,11 @@
         <filtering>true</filtering>
       </resource>
       <resource>
-        <directory>src/main/resources</directory>
+        <directory>src/main/resources</directory> <!-- 指定资源文件所在位置 -->
         <includes>
           <include>**/*</include>
         </includes>
-        <filtering>true</filtering>
+        <filtering>true</filtering> <!-- 开启资源过滤 -->
       </resource>
     </resources>
 
@@ -207,18 +202,18 @@
         </configuration>
       </plugin>
 
-      <plugin>
+     <!-- <plugin>
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <version>2.7</version>
-      </plugin>
+      </plugin>-->
 
-      <plugin>
+     <!-- <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.1.1</version>
         <configuration>
-          <webXml>web\WEB-INF\web.xml</webXml>
-          <warSourceDirectory>web</warSourceDirectory>
+          <webXml>web\WEB-INF\web.xml</webXml> &lt;!&ndash; 指定web.xml 文件位置 &ndash;&gt;
+          <warSourceDirectory>web</warSourceDirectory> &lt;!&ndash; 指定静态文件所在位置 &ndash;&gt;
         </configuration>
       </plugin>
 
@@ -227,12 +222,10 @@
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.2</version>
         <configuration>
-          <url>http://localhost</url>
           <path>/</path>
-          <port>8888</port>
+          <port>8000</port>
         </configuration>
-      </plugin>
-
+      </plugin>-->
 
     </plugins>
   </build>

@@ -5,6 +5,7 @@ import com.alibaba.druid.pool.DruidDataSourceFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
+import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
@@ -12,7 +13,6 @@ import java.util.Properties;
  * @author : SongYF
  * @desc : 数据源
  * @date : 2018/9/7
- * @Copyright (c) 2015 jigoon
  */
 
 //@Component
@@ -27,7 +27,7 @@ public class DataSourceBean {
   private String password;
 
   @Bean(name = "dataSource")
-  @Conditional({DataSourceCondition.class})// 是否加载 Bean 的条件
+  @Conditional({com.fly.spring.DataSourceCondition.class})// 是否加载 Bean 的条件
   public DruidDataSource getDruidDataSource(){
     Properties properties = new Properties();
     properties.setProperty("driverClassName", driverClassName);
